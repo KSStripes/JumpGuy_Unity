@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveController : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    public float moveSpeed = 5f; // speed of horizontal movement
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -20,8 +20,8 @@ public class MoveController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float move = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(move * moveSpeed, rb.velocity.y);
+        float move = Input.GetAxisRaw("Horizontal"); // get movement with arrows left/right
+        rb.velocity = new Vector2(move * moveSpeed, rb.velocity.y); // apply horizontal velocity
 
         //Flip sprite when direction changes
         if (move < 0) spriteRenderer.flipX = true;
