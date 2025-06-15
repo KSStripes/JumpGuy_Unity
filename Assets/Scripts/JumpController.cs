@@ -17,17 +17,23 @@ public class JumpController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Check for jump input and char on ground
-        // "Jump" maps to SPACE Bar by default
-        if (Input.GetButtonDown("Jump") && isGrounded)
+                // Check for jump input and char on ground
+        if (Input.GetKeyDown(KeyCode.Space))
         {
+            Debug.Log("spacebar pressed");
+        }
+
+        // Check for jump input and char on ground
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            Debug.Log("attempt jump");
             // Adjust velocity with a vector of the jumpForce and the current velocity
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
     }
 
     // Check if char is back on ground, update boolean isGrounded
-    void OCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("Collided with: " + collision.gameObject.name);
 
@@ -35,6 +41,7 @@ public class JumpController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+            Debug.Log("player is grounded");
         }
     }
 
@@ -43,7 +50,8 @@ public class JumpController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            isGrounded = false; 
+            isGrounded = false;
+            Debug.Log("player has jumped");
         }
     }
 }
