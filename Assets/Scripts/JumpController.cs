@@ -4,29 +4,25 @@ using UnityEngine;
 
 public class JumpController : MonoBehaviour
 {
-    public float jumpForce = 5f;
+    public float jumpForce = 10f;
     private Rigidbody2D rb;
     private bool isGrounded;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-                // Check for jump input and char on ground
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("spacebar pressed");
-        }
-
         // Check for jump input and char on ground
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            Debug.Log("attempt jump");
+            //Debug.Log("attempt jump");
             // Adjust velocity with a vector of the jumpForce and the current velocity
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
@@ -41,7 +37,8 @@ public class JumpController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
-            Debug.Log("player is grounded");
+            //Debug.Log("player is grounded");
+            animator.SetBool("isGrounded", true);
         }
     }
 
@@ -51,7 +48,8 @@ public class JumpController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = false;
-            Debug.Log("player has jumped");
+            //Debug.Log("player is off ground");
+            animator.SetBool("isGrounded", false);
         }
     }
 }
