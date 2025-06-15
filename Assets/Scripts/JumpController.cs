@@ -1,0 +1,49 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class JumpController : MonoBehaviour
+{
+    public float jumpForce = 5f;
+    private Rigidbody2D rb;
+    private bool isGrounded;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        // Check for jump input and char on ground
+        // "Jump" maps to SPACE Bar by default
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            // Adjust velocity with a vector of the jumpForce and the current velocity
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        }
+    }
+
+    // Check if char is back on ground, update boolean isGrounded
+    void OCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Collided with: " + collision.gameObject.name);
+
+        // Detect ground contact
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+    }
+
+    // Check if char is in air, update boolean isGrounded
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false; 
+        }
+    }
+}
