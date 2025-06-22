@@ -25,9 +25,9 @@ void OnTriggerEnter2D(Collider2D other)
             // Play coin sound
             if (audioSource != null) audioSource.Play();
 
-            // Notify player’s CoinCollector (if present)
-            CoinCollector collector = other.GetComponent<CoinCollector>();
-            if (collector != null) collector.IncCoinCount();
+            // Notify coinUI Manager
+            CoinUIManager ui = FindObjectOfType<CoinUIManager>();
+            if (ui != null) ui.AddCoin();
 
             // Hide coin visuals
             GetComponent<SpriteRenderer>().enabled = false;
