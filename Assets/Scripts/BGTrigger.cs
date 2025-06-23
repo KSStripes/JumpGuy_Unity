@@ -5,6 +5,10 @@ public class BGTrigger : MonoBehaviour
     public GameObject backgroundPrefab;
     public Transform player;  // assign player in Inspector
     private bool hasSpawned = false;
+    
+    public Vector3 spawnOffset = new Vector3(128f, 0, 0);
+    public float fixedY = 0f;
+    public float fixedZ = 0f;
 
     void Start()
     {
@@ -24,7 +28,7 @@ public class BGTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // Spawn relative to current player position
-            Vector3 spawnPosition = player.position;
+            Vector3 spawnPosition = new Vector3(player.position.x, fixedY, fixedZ);
             Instantiate(backgroundPrefab, spawnPosition, Quaternion.identity);
             hasSpawned = true;
         }

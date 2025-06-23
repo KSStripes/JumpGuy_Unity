@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CameraMove : MonoBehaviour
 {
-    public Transform target;         // Assign your player in the Inspector
+    public Transform target;         // Assign player in the Inspector
     public float smoothSpeed = 5f;   // Camera smoothing speed
     private float fixedY;            // Y position to lock
     private float fixedZ;            // Z position to lock
@@ -10,7 +10,7 @@ public class CameraMove : MonoBehaviour
     void Start()
     {
         fixedY = transform.position.y;     // Lock initial Y
-        fixedZ = transform.position.z;     // Lock initial Z (likely -10 for 2D)
+        fixedZ = transform.position.z;     // Lock initial Z (-10 for 2D)
     }
 
     void LateUpdate()
