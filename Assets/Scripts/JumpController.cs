@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class JumpController : MonoBehaviour
 {
-    public float jumpForce = 25f;
+    public float jumpForce = 10f;
     private Rigidbody2D rb;
     private bool isGrounded;
     private Animator animator;
