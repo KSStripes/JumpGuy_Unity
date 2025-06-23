@@ -2,19 +2,24 @@ using UnityEngine;
 
 public class CameraMove : MonoBehaviour
 {
-    public Transform target; // add player to camera
-    public Vector3 offset = new Vector3(0f, 0f, -10f); //maintain camera distance
-    public float smoothSpeed = 5f; // camera move speed
+    public Transform target;         // Assign your player in the Inspector
+    public float smoothSpeed = 5f;   // Camera smoothing speed
+    private float fixedY;            // Y position to lock
+    private float fixedZ;            // Z position to lock
+
+    void Start()
+    {
+        fixedY = transform.position.y;     // Lock initial Y
+        fixedZ = transform.position.z;     // Lock initial Z (likely -10 for 2D)
+    }
 
     void LateUpdate()
     {
+        if (target != null)
         {
-            if (target != null)
-            {
-                Vector3 pos = target.position + offset;
-                Vector3 smoothed = Vector3.Lerp(transform.position, pos, smoothSpeed * Time.deltaTime);
-                transform.position = smoothed;
-            }
+            // Follow only X, lock Y and Z
+            Vector3 desiredPos = new Vector3(target.position.x, fixedY, fixedZ);
+            transform.position = Vector3.Lerp(transform.position, desiredPos, smoothSpeed * Time.deltaTime);
         }
     }
 }
