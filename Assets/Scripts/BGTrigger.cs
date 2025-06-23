@@ -3,34 +3,17 @@ using UnityEngine;
 public class BGTrigger : MonoBehaviour
 {
     public GameObject backgroundPrefab;
-    public Transform player;  // assign player in Inspector
-    private bool hasSpawned = false;
-    
-    public Vector3 spawnOffset = new Vector3(128f, 0, 0);
-    public float fixedY = 0f;
-    public float fixedZ = 0f;
+    public float backgroundWidth = 64f;
 
-    void Start()
-    {
-        // Auto-assign player if not done in Inspector
-        if (player == null)
-        {
-            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-            if (playerObj != null)
-                player = playerObj.transform;
-        }
-    }
+    private bool hasSpawned = false;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (hasSpawned) return;
+        if (hasSpawned || !other.CompareTag("Player")) return;
 
-        if (other.CompareTag("Player"))
-        {
-            // Spawn relative to current player position
-            Vector3 spawnPosition = new Vector3(player.position.x, fixedY, fixedZ);
-            Instantiate(backgroundPrefab, spawnPosition, Quaternion.identity);
-            hasSpawned = true;
-        }
+        // Spawn new background directly next to the current one (same Y/Z)
+        Vector3 spawnPosition = transform.parent.position + new Vector3(backgroundWidth, 0f, 0f);
+        Instantiate(backgroundPrefab, spawnPosition, Quaternion.identity);
+        hasSpawned = true;
     }
 }
