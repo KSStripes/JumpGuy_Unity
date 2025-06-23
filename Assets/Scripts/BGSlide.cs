@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlideBackground : MonoBehaviour
+public class BGSlide : MonoBehaviour
 {
     public Transform player; // get player, as background will slide with him
     public float slideSpeed = 0.1f; // 0 = static, 1 = full follow, 0.1f for mountains = slow
