@@ -13,6 +13,8 @@ public class MainMenu : MonoBehaviour
     public void QuitGame()
     {
         Debug.Log("Quitting the game...");
+        Time.timeScale = 0f; // freeze all movement
+        AudioListener.pause = true; // end all sounds
         Application.Quit();
     }
 }

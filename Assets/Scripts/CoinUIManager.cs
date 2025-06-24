@@ -17,4 +17,10 @@ public class CoinUIManager : MonoBehaviour
     {
         coinText.text = "Coins: " + coinCount;
     }
+
+    // public method to make current score available to final screens
+    public int GetScore()
+    {
+        return coinCount;
+    }
 }
