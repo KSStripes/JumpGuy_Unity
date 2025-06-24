@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            smokeFX.Play(); //play smoke
 
             if (jumpSound != null && audioSource != null)
             {
