@@ -229,7 +229,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 4
-      m_TileSpriteIndex: 4
+      m_TileSpriteIndex: 5
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -239,7 +239,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 3
-      m_TileSpriteIndex: 3
+      m_TileSpriteIndex: 4
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -908,12 +908,12 @@ Tilemap:
     m_Data: {fileID: -1111066810694349934, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
   - m_RefCount: 4
     m_Data: {fileID: 7142315096718967971, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 4997653323410540549, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -8664350753175323101, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   - m_RefCount: 6
     m_Data: {fileID: 7148239301965277931, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
   - m_RefCount: 5
@@ -1369,7 +1369,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5195914609617521491}
-  - component: {fileID: 1813034743309784929}
   m_Layer: 0
   m_Name: PF2
   m_TagString: Untagged
@@ -1397,19 +1396,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1813034743309784929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5844200303527053127}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 171a012d7341b4242af3b2c7ac4cf104, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  platformPrefab: {fileID: 5844200303527053127, guid: d3e177ec35d80402c8d7e34ea936fb5a, type: 3}
 --- !u!1 &8385262249455682555
 GameObject:
   m_ObjectHideFlags: 0
@@ -1590,6 +1576,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnTrigger
       objectReference: {fileID: 0}
+    - target: {fileID: 6729887362660063455, guid: 8d5e5d2ea19fb4a3487503991a11685e, type: 3}
+      propertyPath: platformPrefab
+      value: 
+      objectReference: {fileID: 5844200303527053127, guid: d3e177ec35d80402c8d7e34ea936fb5a, type: 3}
     - target: {fileID: 8278188109572927636, guid: 8d5e5d2ea19fb4a3487503991a11685e, type: 3}
       propertyPath: m_RootOrder
       value: 1
