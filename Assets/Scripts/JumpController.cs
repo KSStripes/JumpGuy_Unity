@@ -9,12 +9,15 @@ public class JumpController : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool isGrounded;
-    private Animator animator;
+    private Animator animator; // adds the animation
+    public AudioClip jumpSound; // assign the clip
+    private AudioSource audioSource;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -25,6 +28,11 @@ public class JumpController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+
+            if (jumpSound != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(jumpSound);
+            }
         }
 
         animator.SetBool("isGrounded", isGrounded);
