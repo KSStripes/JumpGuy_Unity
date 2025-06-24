@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlatformTrigger : MonoBehaviour
 {
-    public GameObject platformPrefab; // Prefab to spawn (must have ExitPoint child)
+    public GameObject platformPrefab; // Prefab to spawn based on ExitPoint
 
     private bool hasSpawned = false;
 
@@ -10,8 +10,8 @@ public class PlatformTrigger : MonoBehaviour
     {
         if (hasSpawned || !other.CompareTag("Player")) return;
 
-        // Find the "ExitPoint" of the current platform
-        Transform exitPoint = transform.parent.Find("ExitPoint"); // Assumes trigger is child of the platform
+        // Find ExitPoint of the current platform
+        Transform exitPoint = transform.parent.Find("ExitPoint"); 
         if (exitPoint == null)
         {
             Debug.LogError("ExitPoint not found on parent platform.");
