@@ -432,7 +432,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6707409501463447534}
   m_Layer: 0
-  m_Name: Coins_3_Arc
+  m_Name: Coins_Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
