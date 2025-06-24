@@ -9,6 +9,9 @@ public class MoveController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    public ParticleSystem SmokeFX; 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +29,7 @@ public class MoveController : MonoBehaviour
         //Flip sprite when direction changes
         if (move < 0) spriteRenderer.flipX = true;
         else if (move > 0) spriteRenderer.flipX = false;
+        SmokeFX.Play();
 
         // Update animation
         bool isRunning = Mathf.Abs(move) > 0.01f;
