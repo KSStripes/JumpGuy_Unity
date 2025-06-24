@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlatformTrigger : MonoBehaviour
 {
-    public GameObject platformPrefab;
+    public GameObject platformPrefab; // Prefab to spawn (must have ExitPoint child)
 
     private bool hasSpawned = false;
 
@@ -10,10 +10,17 @@ public class PlatformTrigger : MonoBehaviour
     {
         if (hasSpawned || !other.CompareTag("Player")) return;
 
-        // Use trigger X , and fixed Y/Z
-        Vector3 spawnPosition = new Vector3(transform.position.x + 5, 0, 0);
+        // Find the "ExitPoint" of the current platform
+        Transform exitPoint = transform.parent.Find("ExitPoint"); // Assumes trigger is child of the platform
+        if (exitPoint == null)
+        {
+            Debug.LogError("ExitPoint not found on parent platform.");
+            return;
+        }
 
-        Instantiate(platformPrefab, spawnPosition, Quaternion.identity);
+        // Spawn the next platform at the ExitPoint position
+        GameObject newPlatform = Instantiate(platformPrefab, exitPoint.position, Quaternion.identity);
+
         hasSpawned = true;
     }
 }
