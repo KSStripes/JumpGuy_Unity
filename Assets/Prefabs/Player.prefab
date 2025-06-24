@@ -41,7 +41,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3216869371862771755}
   serializedVersion: 8
-  lengthInSec: 0.2
+  lengthInSec: 0.5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -4855,8 +4855,7 @@ GameObject:
   - component: {fileID: 8194585680420309013}
   - component: {fileID: 8194585680420309014}
   - component: {fileID: 8194585680420309015}
-  - component: {fileID: 8194585680420309009}
-  - component: {fileID: 8194585680420309011}
+  - component: {fileID: 7091014028524097739}
   - component: {fileID: 8194585680420309008}
   - component: {fileID: 6266863088417860881}
   m_Layer: 0
@@ -4982,7 +4981,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.2}
   m_EdgeRadius: 0
---- !u!114 &8194585680420309009
+--- !u!114 &7091014028524097739
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4991,30 +4990,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 8194585680420309016}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 877c97fd905bc4c3d9106b5bdf060713, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpForce: 5
-  groundCheck: {fileID: 0}
-  groundCheckRadius: 0.02
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  jumpSound: {fileID: 8300000, guid: a564e2bd9a34f4854b0b69f99dc407e4, type: 3}
---- !u!114 &8194585680420309011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8194585680420309016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 610b3adcbd0be43f282d7aaafd01d627, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e8f83d9e46494eeabf0ef5c4b1122ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  SmokeFX: {fileID: 1864347046303578466}
+  jumpForce: 12
+  groundCheck: {fileID: 8194585680420309012}
+  groundCheckRadius: 0.02
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  smokeFX: {fileID: 1864347046303578466}
+  jumpSound: {fileID: 8300000, guid: a564e2bd9a34f4854b0b69f99dc407e4, type: 3}
 --- !u!95 &8194585680420309008
 Animator:
   serializedVersion: 5
