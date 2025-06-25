@@ -2,11 +2,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Vector3 initialPosition;
-    private GameManager gameManager;
 
     [Header("Movement")]
     public float moveSpeed = 5f;
+
 
     [Header("Jumping")]
     public float jumpForce = 12f;
@@ -20,7 +19,8 @@ public class PlayerController : MonoBehaviour
     [Header("Effects")]
     public ParticleSystem smokeFX;
     public AudioClip jumpSound;
-
+    private Vector3 initialPosition;
+    private GameManager gameManager;
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
@@ -129,6 +129,4 @@ public class PlayerController : MonoBehaviour
             Debug.LogWarning("GameManager not found!");
         }
     }
-    
-    
 }
