@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private Vector3 initialPosition;
+    private GameManager gameManager;
+
     [Header("Movement")]
     public float moveSpeed = 5f;
 
@@ -11,6 +14,8 @@ public class PlayerController : MonoBehaviour
     public Vector2 groundCheckSize = new Vector2(0.7f, 0.05f);
     public float groundCheckRadius = 1f;
     public LayerMask groundLayer; // check if touching ground
+
+
 
     [Header("Effects")]
     public ParticleSystem smokeFX;
@@ -29,16 +34,18 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
+        initialPosition = transform.position; // Save starting position
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     void Update()
     {
-        HandleMovement();
-        HandleJump();
+        Move();
+        Jump();
         UpdateAnimations();
     }
 
-    private void HandleMovement()
+    private void Move()
     {
         float move = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(move * moveSpeed, rb.velocity.y);
@@ -54,7 +61,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void HandleJump()
+    private void Jump()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
@@ -84,4 +91,44 @@ public class PlayerController : MonoBehaviour
             Gizmos.DrawCube(groundCheck.position, groundCheckSize);
         }
     }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            PlayerDies();
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.CompareTag("KillZone"))
+        {
+            PlayerDies();
+        }
+    }
+
+    public void PlayerDies()
+    {
+        // Immediately return the player to start
+        transform.position = initialPosition;
+
+        // Optional: Reset velocity
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.velocity = Vector2.zero;
+        }
+
+        // Notify GameManager
+        if (gameManager != null)
+        {
+            gameManager.UpdateLives();
+        }
+        else
+        {
+            Debug.LogWarning("GameManager not found!");
+        }
+    }
+    
+    
 }
