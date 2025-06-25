@@ -1,30 +1,14 @@
 using UnityEngine;
-/*
-Parameters:
-Receives GameState.cs struct
-Receives UIManager reference
 
-Sets up and manages: 
-coinCount
-lives
-isGameOver
-isGameWon
-
-Methods
-AddCoin();
-GetScore();
-UpdateLives();
-WinGame();
-LoseGame()
-*/
+/// Summary: Manages core game state: coins, lives, win/lose conditions.
 public class GameManager : MonoBehaviour
 {
     public UIManager uiManager;
     private GameState gameState;
+    private AudioSource audioSource;
 
     void Start()
     {
-        // Initialize game state
         gameState = new GameState
         {
             coinCount = 0,
@@ -33,23 +17,18 @@ public class GameManager : MonoBehaviour
             gameOver = false
         };
 
-        // Initial UI update
+        audioSource = GetComponent<AudioSource>();
         uiManager.UpdateUI(gameState);
     }
 
-    // methods to manage coinCount
     public void AddCoin()
     {
         gameState.coinCount++;
         uiManager.UpdateCoinUI(gameState.coinCount);
     }
-    // public method to make current score available to final screens
-    public int GetScore()
-    {
-        return gameState.coinCount;
-    }
 
-    // method to manage lives
+    public int GetScore() => gameState.coinCount;
+
     public void UpdateLives()
     {
         gameState.lives--;
@@ -58,37 +37,45 @@ public class GameManager : MonoBehaviour
         {
             uiManager.UpdateLivesUI(gameState.lives);
         }
-        else if (gameState.lives <= 0)
+        else
         {
             gameState.gameOver = true;
             LoseGame();
-
         }
     }
-    // method to end game
+
     public void LoseGame()
     {
-        gameState.gameOver = true;
-        uiManager.ShowGameOver();
+        HandleGameEnd(gameOver: true, gameWon: false);
     }
 
     public void WinGame()
     {
-        gameState.gameWon = true;
+        HandleGameEnd(gameOver: false, gameWon: true);
+    }
+
+    private void HandleGameEnd(bool gameOver, bool gameWon)
+    {
+        gameState.gameOver = gameOver;
+        gameState.gameWon = gameWon;
+
         uiManager.UpdateUI(gameState);
-        Time.timeScale = 0f; // freeze game
+
+        // Play sound if available
+        if (audioSource != null) audioSource.Play();
+
+        // Freeze game
+        Time.timeScale = 0f;
 
         // Disable player input
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
-            PlayerController controller = player.GetComponent<PlayerController>(); // Replace with your actual script name
+            PlayerController controller = player.GetComponent<PlayerController>();
             if (controller != null)
             {
                 controller.enabled = false;
             }
         }
     }
-
-
 }
