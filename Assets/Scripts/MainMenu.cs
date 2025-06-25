@@ -6,7 +6,7 @@ public class MainMenu : MonoBehaviour
     // press start
     public void StartGame()
     {
-        SceneManager.LoadScene("Assignment Base");
+        SceneManager.LoadScene("Scene1");
     }
 
     // press quit
