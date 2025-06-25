@@ -10,12 +10,14 @@ public class Enemy : MonoBehaviour
     public LayerMask groundLayer;
 
     private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer; 
     private bool isGrounded;
     private bool shouldJump;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -26,6 +28,12 @@ public class Enemy : MonoBehaviour
 
         // Player Direction?
         float direction = Mathf.Sign(player.position.x - transform.position.x);
+
+        // Flip sprite based on direction
+        if (direction != 0)
+        {
+            spriteRenderer.flipX = direction > 0; // flip if moving left
+        }
 
         // Player above detection
         bool isPlayerAbove = Physics2D.Raycast(transform.position, Vector2.up, 3f, 1 << player.gameObject.layer);
@@ -42,14 +50,8 @@ public class Enemy : MonoBehaviour
             RaycastHit2D groundInFront = Physics2D.Raycast(transform.position, new Vector2(direction, 0), 2f, groundLayer);
             // If Gap
             RaycastHit2D gapAhead = Physics2D.Raycast(transform.position + new Vector3(direction, 0, 0), Vector2.down, 2f, groundLayer);
-            // If platform
-            RaycastHit2D platformAbove = Physics2D.Raycast(transform.position, Vector2.up, 3f, groundLayer);
 
             if (!groundInFront.collider && !gapAhead.collider)
-            {
-                shouldJump = true;
-            }
-            else if (isPlayerAbove && platformAbove.collider)
             {
                 shouldJump = true;
             }
