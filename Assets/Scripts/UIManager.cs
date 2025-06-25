@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -20,17 +18,20 @@ public class UIManager : MonoBehaviour
     // Assign input params in inspector
     public TMP_Text coinText;
     public TMP_Text livesText;
-   // public GameObject gameWonPanel;
-    //public GameObject gameOverPanel;
+    public GameObject gameWonPanel;
+    public GameObject gameOverPanel;
 
     // Method to update UI according to gameState
     // Pass in global struct gameState
     public void UpdateUI(GameState gameState)
     {
-        updateCoinUI(gameState.coinCount);
+        UpdateCoinUI(gameState.coinCount);
+        UpdateLivesUI(gameState.lives);
+        if (gameState.gameWon) ShowGameWon(gameState);
+        if (gameState.gameOver) ShowGameOver();
     }
 
-    public void updateCoinUI(int coinCount)
+    public void UpdateCoinUI(int coinCount)
     {
         if (coinText != null)
         {
@@ -39,19 +40,31 @@ public class UIManager : MonoBehaviour
     }
 
 
-    public void updateLivesUI(int lives)
+    public void UpdateLivesUI(int lives)
     {
         if (livesText != null)
         {
             livesText.text = $"Lives: {lives}";
         }
     }
-    void showGameWon()
+    public void ShowGameWon(GameState gameState)
     {
-        //do something
+        if (gameWonPanel != null && !gameWonPanel.activeSelf)
+        {
+            gameWonPanel.SetActive(true);
+            TMP_Text winText = gameWonPanel.GetComponentInChildren<TMP_Text>();
+            if (winText != null)
+            {
+                winText.text = $"You Won! Final Score {gameState.coinCount}!";
+            }
+
+        }
     }
-    void showGameOver()
+    public void ShowGameOver()
     {
-        //do something
+        if (gameOverPanel != null && !gameOverPanel.activeSelf)
+        {
+            gameOverPanel.SetActive(true);
+        }
     }
 }

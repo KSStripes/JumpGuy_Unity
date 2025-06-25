@@ -33,11 +33,7 @@ public class Coin : MonoBehaviour
 
             // Notify GameManager to add coin
             GameManager gm = FindObjectOfType<GameManager>();
-            if (gm != null) gm.addCoin();
-
-            // Hide coin visuals
-            //GetComponent<SpriteRenderer>().enabled = false;
-            //GetComponent<Collider2D>().enabled = false;
+            if (gm != null) gm.AddCoin();
 
             // Delay destruction to allow sound to finish
             Destroy(gameObject, 0.3f);

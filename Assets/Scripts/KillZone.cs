@@ -13,14 +13,14 @@ public class KillZone : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // if (other.CompareTag("Player"))
-        // {
+        if (other.CompareTag("Player"))
+        {
+            // play falling sound
+            if (audioSource != null) audioSource.Play();
 
-        //     if (audioSource != null)
-        //     {
-        //         audioSource.Play();
-        //     }
-        //     GameManager.Update();
-        // }
+            // Notify GameManager to update lives
+            GameManager gm = FindObjectOfType<GameManager>();
+            if (gm != null) gm.UpdateLives();
+        }
     }
 }

@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.Analytics;
-
 /*
 Parameters:
 Receives GameState.cs struct
@@ -13,10 +11,11 @@ isGameOver
 isGameWon
 
 Methods
-addCoin();
-getScore();
-updateLives();
-endGame();
+AddCoin();
+GetScore();
+UpdateLives();
+WinGame();
+LoseGame()
 */
 public class GameManager : MonoBehaviour
 {
@@ -39,10 +38,10 @@ public class GameManager : MonoBehaviour
     }
 
     // methods to manage coinCount
-    public void addCoin()
+    public void AddCoin()
     {
         gameState.coinCount++;
-        uiManager.updateCoinUI(gameState.coinCount);
+        uiManager.UpdateCoinUI(gameState.coinCount);
     }
     // public method to make current score available to final screens
     public int GetScore()
@@ -51,23 +50,45 @@ public class GameManager : MonoBehaviour
     }
 
     // method to manage lives
-    void updateLives()
+    public void UpdateLives()
     {
         gameState.lives--;
 
         if (gameState.lives > 0)
         {
-            uiManager.updateLivesUI(gameState.lives);
+            uiManager.UpdateLivesUI(gameState.lives);
         }
         else if (gameState.lives <= 0)
         {
-            gameState.gameOver = true; 
-            
+            gameState.gameOver = true;
+            LoseGame();
+
         }
     }
     // method to end game
-    void endGame()
+    public void LoseGame()
     {
-        
+        gameState.gameOver = true;
+        uiManager.ShowGameOver();
     }
+
+    public void WinGame()
+    {
+        gameState.gameWon = true;
+        uiManager.UpdateUI(gameState);
+        Time.timeScale = 0f; // freeze game
+
+        // Disable player input
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            PlayerController controller = player.GetComponent<PlayerController>(); // Replace with your actual script name
+            if (controller != null)
+            {
+                controller.enabled = false;
+            }
+        }
+    }
+
+
 }
