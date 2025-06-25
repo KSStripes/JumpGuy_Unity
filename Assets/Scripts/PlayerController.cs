@@ -8,8 +8,9 @@ public class PlayerController : MonoBehaviour
     [Header("Jumping")]
     public float jumpForce = 12f;
     public Transform groundCheck;
-    public float groundCheckRadius = 0.5f;
-    public LayerMask groundLayer;
+    public Vector2 groundCheckSize = new Vector2(0.7f, 0.05f);
+    public float groundCheckRadius = 1f;
+    public LayerMask groundLayer; // check if touching ground
 
     [Header("Effects")]
     public ParticleSystem smokeFX;
@@ -80,7 +81,7 @@ public class PlayerController : MonoBehaviour
         if (groundCheck != null)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+            Gizmos.DrawCube(groundCheck.position, groundCheckSize);
         }
     }
 }
