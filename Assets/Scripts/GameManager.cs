@@ -1,68 +1,73 @@
 using UnityEngine;
-using TMPro;
-using UnityEngine.SceneManagement;
+using UnityEngine.Analytics;
 
+/*
+Parameters:
+Receives GameState.cs struct
+Receives UIManager reference
+
+Sets up and manages: 
+coinCount
+lives
+isGameOver
+isGameWon
+
+Methods
+addCoin();
+getScore();
+updateLives();
+endGame();
+*/
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }
+    public UIManager uiManager;
+    private GameState gameState;
 
-    [Header("Game Stats")]
-    public int lives = 3;
-    public int maxLives = 3;
-
-    [Header("UI")]
-    public TextMeshProUGUI livesText;
-
-    private void Awake()
+    void Start()
     {
-        if (Instance != null && Instance != this)
+        // Initialize game state
+        gameState = new GameState
         {
-            Destroy(gameObject);
-            return;
-        }
+            coinCount = 0,
+            lives = 3,
+            gameWon = false,
+            gameOver = false
+        };
 
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
+        // Initial UI update
+        uiManager.UpdateUI(gameState);
     }
 
-    private void Start()
+    // methods to manage coinCount
+    public void addCoin()
     {
-        UpdateLivesUI();
+        gameState.coinCount++;
+        uiManager.updateCoinUI(gameState.coinCount);
+    }
+    // public method to make current score available to final screens
+    public int GetScore()
+    {
+        return gameState.coinCount;
     }
 
-    public void LoseLife()
+    // method to manage lives
+    void updateLives()
     {
-        lives--;
+        gameState.lives--;
 
-        if (lives <= 0)
+        if (gameState.lives > 0)
         {
-            lives = 0;
-            GameOver();
+            uiManager.updateLivesUI(gameState.lives);
         }
-        else
+        else if (gameState.lives <= 0)
         {
-            // Reload current scene
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            gameState.gameOver = true; 
+            
         }
-
-        UpdateLivesUI();
     }
-
-    public void ResetGame()
+    // method to end game
+    void endGame()
     {
-        lives = maxLives;
-        UpdateLivesUI();
-    }
-
-    private void UpdateLivesUI()
-    {
-        if (livesText != null)
-            livesText.text = "Lives: " + lives;
-    }
-
-    private void GameOver()
-    {
-        Debug.Log("Game Over!");
-        // Load Game Over scene or show Game Over UI here
+        
     }
 }
