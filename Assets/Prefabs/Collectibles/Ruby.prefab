@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1880643962982184543}
   - component: {fileID: 2742268592800933917}
   m_Layer: 0
-  m_Name: RubyCoin
+  m_Name: Ruby
   m_TagString: Collectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
