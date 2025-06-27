@@ -35,7 +35,7 @@ public class UIManager : MonoBehaviour
     {
         if (coinText != null)
         {
-            coinText.text = $"Coins: {coinCount}";
+            coinText.text = $"Score: {coinCount}";
         }
     }
 

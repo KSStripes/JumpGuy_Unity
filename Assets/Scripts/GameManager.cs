@@ -21,10 +21,11 @@ public class GameManager : MonoBehaviour
         uiManager.UpdateUI(gameState);
     }
 
-    public void AddCoin()
+    public void AddCoin(int amount = 1)
     {
-        gameState.coinCount++;
+        gameState.coinCount += amount;
         uiManager.UpdateCoinUI(gameState.coinCount);
+        Debug.Log(gameState.coinCount);
     }
 
     public int GetScore() => gameState.coinCount;

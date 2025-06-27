@@ -12,6 +12,7 @@ public class Coin : MonoBehaviour
 {
     private AudioSource audioSource;
     private bool collected = false;
+    protected virtual int coinValue => 1; 
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +34,7 @@ public class Coin : MonoBehaviour
 
             // Notify GameManager to add coin
             GameManager gm = FindObjectOfType<GameManager>();
-            if (gm != null) gm.AddCoin();
+            if (gm != null) gm.AddCoin(coinValue);
 
             // Delay destruction to allow sound to finish
             Destroy(gameObject, 0.3f);
