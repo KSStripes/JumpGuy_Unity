@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     {
         gameState.coinCount += amount;
         uiManager.UpdateCoinUI(gameState.coinCount);
-        Debug.Log(gameState.coinCount);
+        //Debug.Log(gameState.coinCount);
     }
 
     public int GetScore() => gameState.coinCount;
